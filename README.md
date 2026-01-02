@@ -41,3 +41,5 @@ Voir le fichier `INSTALLATION.md` pour déployer sur XAMPP/WAMP.
 
 ---
 *Projet réalisé pour dossier professionnel BTS SIO - Option SLAM.*
+*Auteur : Mathy SIO*
+
