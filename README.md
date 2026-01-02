@@ -1,45 +1,34 @@
-# CYBER-INCIDENT 🛡️
-**Plateforme de gestion et de signalement d’incidents cyber**
+# Projet Cyber-Incident
+**Plateforme de gestion et de signalement d’incidents de sécurité**
 
-Ce projet est une application pédagogique réalisée dans le cadre du BTS SIO SLAM. Il vise à démontrer les compétences en développement web sécurisé.
+Ce projet a été réalisé dans le cadre du BTS SIO (Services Informatiques aux Organisations), option SLAM.
+L'objectif est de proposer une solution technique permettant de recenser et traiter des incidents de cybersécurité, tout en appliquant les bonnes pratiques de développement web sécurisé.
 
-## 📂 1. Architecture du Projet
-L'architecture suit une organisation logique et modulaire ("Separation of Concerns") sans utiliser de framework lourd, parfait pour comprendre les bases.
+## Architecture Technique
+Le projet est développé en PHP natif (sans framework) afin de maîtriser l'ensemble des flux de données et des mécanismes de sécurité. L'architecture respecte le principe de séparation des responsabilités (MVC simplifié).
 
-```
-cyber-incident/
-├── assets/              # Ressources statiques
-│   ├── css/             # Feuilles de style "Dark Mode"
-├── config/              # Configuration
-│   └── db.php           # Connexion BDD (PDO) centralisée
-├── includes/            # Fragments de code réutilisables
-│   ├── functions.php    # Fonctions de sécurité (XSS, CSRF)
-│   ├── header.php       # En-tête HTML
-│   └── footer.php       # Pied de page HTML
-├── admin/               # Espace administration
-│   ├── dashboard.php    # Liste des incidents
-│   └── view_incident.php # Gestion d'un incident
-├── uploads/             # Stockage sécurisé (.htaccess)
-├── index.php            # Page d'accueil
-├── login.php            # Connexion
-├── register.php         # Inscription
-├── report.php           # Formulaire de signalement
-└── logout.php           # Déconnexion
-```
+**Structure des dossiers :**
+- `assets/` : Feuilles de style CSS et images.
+- `config/` : Configuration de la base de données (PDO).
+- `includes/` : Bibliothèques de fonctions et templates HTML (Header/Footer).
+- `admin/` : Interface de gestion réservée aux administrateurs.
+- `uploads/` : Zone de stockage des preuves (sécurisée via .htaccess).
+- `fichiers racine` : Contrôleurs principaux (login, register, report...).
 
-## 🔐 2. Sécurité Implémentée (Points Forts)
-Ce projet respecte les recommandations de l'OWASP pour les étudiants :
+## Mesures de Sécurité
+Conformément aux exigences du référentiel SIO, une attention particulière a été portée à la sécurité applicative :
 
-*   **Injections SQL** : Bloquées via `PDO::prepare()`.
-*   **XSS (Cross-Site Scripting)** : Toutes les données affichées sont nettoyées.
-*   **CSRF** : Protection des formulaires par jeton (Token).
-*   **Session Fixation** : Régénération des ID de session à la connexion.
-*   **Mots de Passe** : Hachage fort (`BCRYPT`).
+1.  **Injections SQL** : Toutes les requêtes vers la base de données utilisent des requêtes préparées via l'objet PDO.
+2.  **Protection XSS** : Les entrées utilisateurs sont systématiquement échappées avant affichage.
+3.  **Cross-Site Request Forgery (CSRF)** : Un système de jetons (tokens) protège l'ensemble des formulaires.
+4.  **Authentification** : Utilisation de l'algorithme BCRYPT pour le hachage des mots de passe.
+5.  **Sécurité des fichiers** : Vérification des types MIME lors de l'upload et restrictions d'accès serveur (.htaccess).
 
-## 🚀 Installation
-Voir le fichier `INSTALLATION.md` pour déployer sur XAMPP/WAMP.
+## Déploiement
+Le projet nécessite un serveur Apache/MySQL (environnement WAMP/XAMPP recommandé).
+Les instructions détaillées sont disponibles dans le fichier `INSTALLATION.md`.
 
 ---
-*Projet réalisé pour dossier professionnel BTS SIO - Option SLAM.*
+*Projet réalisé pour dossier professionnel BTS SIO.*
 *Auteur : Mathys SIO*
 
