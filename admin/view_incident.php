@@ -20,6 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $stmt = $pdo->prepare("UPDATE incidents SET status = ? WHERE id = ?");
     if ($stmt->execute([$new_status, $id])) {
+        // Log de l'action admin
+        log_action($pdo, 'STATUS_CHANGE', "Incident #$id passé à '$new_status'");
+        
         $message = "Statut mis à jour avec succès.";
     }
 }

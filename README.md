@@ -23,6 +23,8 @@ Conformément aux exigences du référentiel SIO, une attention particulière a 
 3.  **Cross-Site Request Forgery (CSRF)** : Un système de jetons (tokens) protège l'ensemble des formulaires.
 4.  **Authentification** : Utilisation de l'algorithme BCRYPT pour le hachage des mots de passe.
 5.  **Sécurité des fichiers** : Vérification des types MIME lors de l'upload et restrictions d'accès serveur (.htaccess).
+6.  **Traçabilité (Logs)** : Journalisation centrale de toutes les actions sensibles (connexions, signalements, modifications) avec horodatage et IP.
+7.  **Protection Brute-Force** : Banissement temporaire des adresses IP après 5 tentatives de connexion erronées (Rate Limiting).
 
 ## Déploiement
 Le projet nécessite un serveur Apache/MySQL (environnement WAMP/XAMPP recommandé).

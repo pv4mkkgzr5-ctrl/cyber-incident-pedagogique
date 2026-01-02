@@ -16,6 +16,31 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Security Headers (Durcissement)
+header("X-Frame-Options: DENY"); // Empêche d'être intégré dans une iframe
+header("X-XSS-Protection: 1; mode=block");
+header("X-Content-Type-Options: nosniff");
+
+/**
+ * Enregistre une action dans les logs (Traçabilité)
+ */
+function log_action($pdo, $action_type, $details = '', $user_id = null) {
+    // Si l'utilisateur est connecté et $user_id n'est pas fourni, on prend celui de la session
+    if ($user_id === null && isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
+    }
+    
+    $ip = $_SERVER['REMOTE_ADDR'];
+    
+    try {
+        $stmt = $pdo->prepare("INSERT INTO logs (user_id, action_type, details, ip_address) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$user_id, $action_type, $details, $ip]);
+    } catch (Exception $e) {
+        // En cas d'erreur de log, on continue quand même (fail-open pour ne pas bloquer l'usage)
+        // Mais idéalement on devrait alerter l'admin.
+    }
+}
+
 /**
  * Protection XSS (Cross-Site Scripting)
  * Échappe les caractères spéciaux HTML

@@ -52,6 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($error)) {
             $stmt = $pdo->prepare("INSERT INTO incidents (user_id, type_incident, description, created_at) VALUES (?, ?, ?, NOW())");
             if ($stmt->execute([$user_id, $type, $description])) {
+                // Log de l'action
+                $new_id = $pdo->lastInsertId();
+                log_action($pdo, 'REPORT_CREATE', "Nouvel incident #$new_id ($type)");
+                
                 $success = "Signalement enregistré avec succès ! Un agent va le traiter.";
             } else {
                 $error = "Erreur lors de l'enregistrement en base de données.";
