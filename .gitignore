@@ -1,0 +1,14 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Dossiers générés / Uploads
+uploads/*
+!uploads/.htaccess
+!uploads/index.html
+
+# Configuration (Optionnel : à décommenter si vous utilisez de vrais mots de passe)
+# config/db.php
+
+# Dépendances (si ajout de Composer plus tard)
+vendor/
